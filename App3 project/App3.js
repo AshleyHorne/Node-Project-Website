@@ -99,13 +99,12 @@ app.get('/GuestBook', function(request,response) {
 
   var qury_two = `SELECT * FROM contact`;
   secon.query(qury_two, function (err, result) {
-    if (err) throw err
-    console.log(result);
+    if (err) throw err;
+      console.log(result);
+      response.render("GuestBook",{list: result});
+
+     
   });
-
-  
-
-  response.render("GuestBook");
 
   
 });
