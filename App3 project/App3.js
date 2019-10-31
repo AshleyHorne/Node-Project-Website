@@ -4,6 +4,7 @@ var fs = require('fs');
 var bodyParser =  require('body-parser');
 console.log(bodyParser);
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var jsonParser = bodyParser.json();
 var mysql =  require('mysql');
 
 
@@ -96,16 +97,17 @@ app.get('/GuestBook', function(request,response) {
     console.log("Connected!");
   });
 
-  con.query{
-    'SELECT *FROM contact',
-    function(err, row){
-      if(rows.length > 0){
-        contact = rows;
-      } else{
-        contact = null;
-      }
+  var qury_two = `SELECT * FROM contact`;
+  secon.query(qury_two, function (err, result, fields) {
+    if (err) {
+      throw err;
+    console.log(result);
     }
-  };
+    
+
+  });
+
+  
 
   response.render("GuestBook");
 
