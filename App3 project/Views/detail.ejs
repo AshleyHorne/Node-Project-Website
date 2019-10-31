@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+
+    <br>
+    <h1>Player Ashe Stats</h1>
+    <ul>
+        <% str.forEach(function(item) { %>
+            <li><h2>Name: <%= item.info.player_Ashe.name %></h2></li>
+            <li><h2>Age: <%= item.info.player_Ashe.age %></h2></li>
+            <li><h2>Address: <%= item.info.player_Ashe.address %></h2></li>
+            <li><h2>Hobbies: <%= item.info.player_Ashe.hobbies %></h2></li> 
+        <% }); %>
+    </ul>
+</body>
+</html>
