@@ -98,13 +98,9 @@ app.get('/GuestBook', function(request,response) {
   });
 
   var qury_two = `SELECT * FROM contact`;
-  secon.query(qury_two, function (err, result, fields) {
-    if (err) {
-      throw err;
+  secon.query(qury_two, function (err, result) {
+    if (err) throw err
     console.log(result);
-    }
-    
-
   });
 
   
