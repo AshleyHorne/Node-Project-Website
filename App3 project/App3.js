@@ -11,10 +11,11 @@ var mysql =  require('mysql');
 var port = process.eventNames.PORT || 2000;
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.use('../App3 project/Public/stylesheet.css', express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 
 app.set('views', __dirname + '/views');
 app.set('view engine','ejs');
+app.use('/ublic', express.static('public'));
 
 var str = JSON.parse(fs.readFileSync('./familyInfo.json', 'utf8'));
 
