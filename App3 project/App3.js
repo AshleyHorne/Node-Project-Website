@@ -4,7 +4,6 @@ var fs = require('fs');
 var bodyParser =  require('body-parser');
 console.log(bodyParser);
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-var jsonParser = bodyParser.json();
 var mysql =  require('mysql');
 
 
@@ -74,7 +73,7 @@ app.post('/form', urlencodedParser, function(request,response) {
     console.log("Connected!");
   });
 
-  var qury = `INSERT INTO contact (first, lastname, email) VALUES ("${request.body.first}", "${request.body.lastname}", "${request.body.email})`;
+  var qury =`INSERT INTO contact (first, lastname, email) VALUES ("${request.body.first}", "${request.body.lastname}", "${request.body.email})`;
   con.query(qury, function (err, result) {
     if (err) throw err;
     console.log("1 record inserted");
@@ -84,16 +83,7 @@ app.post('/form', urlencodedParser, function(request,response) {
 
 
 app.get('/GuestBook', function(request,response) {
-  response.render("GuestBook");
-});
 
-app.post('/GuestBook', urlencodedParser, function(request,response) {
-  response.send("here is the list");
-  // console.log(request.body.name);
-  // console.log(request.body.email);
-  // console.log(request.body.comment);
-
-  
   var secon = mysql.createConnection({
     host: "localhost",
     user:"root",
@@ -106,13 +96,27 @@ app.post('/GuestBook', urlencodedParser, function(request,response) {
     console.log("Connected!");
   });
 
-  var qury_two = `SELECT * FROM contact`;
-  secon.query(qury_two, function (err, result) {
-    if (err) throw err;
-    console.log("open list");
-  });
+  con.query{
+    'SELECT *FROM contact',
+    function(err, row){
+      if(rows.length > 0){
+        contact = rows;
+      } else{
+        contact = null;
+      }
+    }
+  };
 
+  response.render("GuestBook");
+
+  
 });
+
+
+
+  
+ 
+
 
 
 
