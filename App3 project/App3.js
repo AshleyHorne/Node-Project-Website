@@ -8,15 +8,12 @@ var jsonParser = bodyParser.json();
 var mysql =  require('mysql');
 
 var port = process.eventNames.PORT || 2000;
-//app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({extended:true}));
 
 app.use('./assets', express.static(__dirname + '/public'));
 
 app.set('views', __dirname + '/views');
 app.set('view engine','ejs');
-
-
-
 
 var str = JSON.parse(fs.readFileSync('./familyInfo.json', 'utf8'));
 
@@ -39,12 +36,19 @@ app.get('/players', function(request,response) {
     response.render("players", {str: str});
 });
 
-app.post('/players.', function (request, response){
-  p.choice = request.body.p_choice;
-  response('players + p.choice');
+app.post('/players', function (request, response){
+ console.log(request.body.p_choice);
+ p_choice = request.body.p_choice;
+  response.redirect('players/' + p_choice);
 });
 
 app.get('/players/:p_choice', function(request,response) {
+  var p_choice = request.params.p_choice;
+  console.log(p_choice);
+  response.render('familyEntry', {p_choice: p_choice, str: str});
+});
+
+app.post('/players/:p_choice', function(request,response) {
   var p_choice = request.params.p_choice;
   console.log(p_choice);
   response.render('familyEntry', {p_choice: p_choice, str: str});
@@ -54,12 +58,14 @@ app.get('/form', function(request,response) {
   response.render("form");
 });
 
+
 app.post('/form', urlencodedParser, function(request,response) {
   response.send("Submission has been accepted");
   // console.log(request.body.name);
   // console.log(request.body.email);
   // console.log(request.body.comment);
 
+  
   var con = mysql.createConnection({
     host: "localhost",
     user:"root",
@@ -72,12 +78,16 @@ app.post('/form', urlencodedParser, function(request,response) {
     console.log("Connected!");
   });
 
-  var qury = `INSERT INTO contact (first, lastname) VALUES ("${request.body.first}", "${request.body.lastname}")`;
+  var qury = `INSERT INTO contact (first, lastname, email) VALUES ("${request.body.first}", "${request.body.lastname}", "${request.body.email})`;
   con.query(qury, function (err, result) {
     if (err) throw err;
     console.log("1 record inserted");
   });
   
+});
+
+app.get('/GuestBook', function(request,response) {
+  response.render("GuestBook");
 });
 
 
