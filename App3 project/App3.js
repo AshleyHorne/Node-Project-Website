@@ -82,7 +82,7 @@ var Storage = multer.diskStorage({
 
   }
 
-});
+}); 
 
 var upload = multer({
 
