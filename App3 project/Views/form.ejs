@@ -1,23 +1,24 @@
 <html>
     <head>
-
+<style>
+</style>
     </head>
     
     <body>
             <%- include navigationbar.ejs %>
         <form  action="/form" method="post">
             First name:<br>
-            <input type="text" name="first" value="Your first name" required>
+            <input type="text" name="first" value="first"  required>
             <br>
             
             Last name:<br>
-            <input type="text" name="lastname" value="Your last name" required>
+            <input type="text" name="lastname"  value="lastname" required>
             <br><br>
 
             Email:<br>
-            <input type="text" name="Email" value="Your Email" required>
+            <input type="text" name="Email"  value="email" required>
             <br>
-            <input type="submit" value="Submit">
+            <input type="submit" name="submit">
            
         </form>
     </body>

@@ -11,12 +11,13 @@ var mysql =  require('mysql');
 var port = process.eventNames.PORT || 2000;
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.use(express.static(__dirname + '/public'));
+app.use('../App3 project/Public/stylesheet.css', express.static(__dirname + '/Public'));
 
+app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine','ejs');
-app.use('/ublic', express.static('public'));
 
+app.use('/Public', express.static('Public'));
 var str = JSON.parse(fs.readFileSync('./familyInfo.json', 'utf8'));
 
 
@@ -52,6 +53,11 @@ app.post('/players/:p_choice', function(request,response) {
   response.render('familyEntry', {p_choice: p_choice, str: str});
 });
 
+
+app.get('/Hobbies', function(request,response) {
+  response.render("Hobbies");
+});
+
 app.get('/form', function(request,response) {
   response.render("form");
 });
@@ -75,7 +81,8 @@ app.post('/form', urlencodedParser, function(request,response) {
     console.log("Connected!");
   });
 
-  var qury =`INSERT INTO contact (first, lastname, email) VALUES ("${request.body.first}", "${request.body.lastname}", "${request.body.email})`;
+  var qury = `INSERT INTO contact (first, lastname, email) VALUES ("${request.body.first}", "${request.body.lastname}", "${request.body.email})`;
+  
   con.query(qury, function (err, result) {
     if (err) throw err;
     console.log("1 record inserted");
