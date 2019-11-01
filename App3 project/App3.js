@@ -6,6 +6,7 @@ console.log(bodyParser);
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var jsonParser = bodyParser.json();
 var mysql =  require('mysql');
+var formidable = require('formidable');
 
 
 var port = process.eventNames.PORT || 2000;
@@ -58,6 +59,10 @@ app.get('/Hobbies', function(request,response) {
   response.render("Hobbies");
 });
 
+app.get('/Submission', function(request,response) {
+  response.render("Submission");
+});
+
 app.get('/form', function(request,response) {
   response.render("form");
 });
@@ -81,7 +86,7 @@ app.post('/form', urlencodedParser, function(request,response) {
     console.log("Connected!");
   });
 
-  var qury = `INSERT INTO contact (first, lastname, email) VALUES ("${request.body.first}", "${request.body.lastname}", "${request.body.email})`;
+  var qury = `INSERT INTO contact (first, lastname, email) VALUES ("${request.body.first}", "${request.body.lastname}", "${request.body.email}")`;
   
   con.query(qury, function (err, result) {
     if (err) throw err;
