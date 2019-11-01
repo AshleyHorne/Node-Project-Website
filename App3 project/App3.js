@@ -6,7 +6,9 @@ console.log(bodyParser);
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var jsonParser = bodyParser.json();
 var mysql =  require('mysql');
-var formidable = require('formidable');
+var multer = require('multer');
+upload = require("express-fileupload");
+
 
 
 var port = process.eventNames.PORT || 2000;
@@ -62,6 +64,60 @@ app.get('/Hobbies', function(request,response) {
 app.get('/Submission', function(request,response) {
   response.render("Submission");
 });
+
+
+
+
+var Storage = multer.diskStorage({
+
+  destination: function(req, file, callback) {
+
+      callback(null, "./Images");
+
+  },
+
+  filename: function(req, file, callback) {
+
+      callback(null, file.fieldname + "_" + Date.now() + "Twitter profile (without name)" + file.originalname);
+
+  }
+
+});
+
+var upload = multer({
+
+  storage: Storage
+
+}).array("imgUploader", 3); //Field name and max count
+
+app.get("/", function(req, res) {
+
+  res.sendFile(__dirname + "/index.html");
+
+});
+
+app.post("/api/Upload", function(req, res) {
+
+  upload(req, res, function(err) {
+
+      if (err) {
+
+          return res.end("Something went wrong!");
+
+      }
+
+      return res.end("File uploaded sucessfully!.");
+
+  });
+
+});
+
+
+
+
+
+
+
 
 app.get('/form', function(request,response) {
   response.render("form");
