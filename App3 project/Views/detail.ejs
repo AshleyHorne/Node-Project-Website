@@ -17,10 +17,10 @@
               color: powderblue;
                 text-decoration: none;
                 text-transform: uppercase;
-                font-size: 200%;
+                font-size: 300%;
                 font-family: 'Staatliches';
             }
-            h2{
+            h2, h3{
               color: powderblue;
                text-decoration: none;
             }
@@ -45,7 +45,8 @@
 <body>
         <%- include navigationbar.ejs %>
     <br> 
-    <h1>Player Ashe Stats</h1>
+    <h1>Ashley</h1>
+    <h3>My name is Ashley, but I also go by Ashe.</h3>
     <ul>
         <% str.forEach(function(item) { %>
             <li><h2>Name: <%= item.info.player_Ashe.name %></h2></li>

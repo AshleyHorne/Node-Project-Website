@@ -4,6 +4,19 @@
     body{
         background-color: #415746; 
     }
+    h1{
+              color: powderblue;
+                text-decoration: none;
+                text-transform: uppercase;
+                font-size: 300%;
+                font-family: 'Staatliches';
+                
+                top:150px;
+            }
+            h2{
+              color: powderblue;
+               text-decoration: none;
+            }
     input[type=submit]{
     display: inline-block;
     padding: 10px 30px;
@@ -30,6 +43,7 @@ input[type=checkbox]{
     
     <body>
             <%- include navigationbar.ejs %>
+            <h1>Feed Back</h1>
         <form  action="/form" method="post">
             First name:<br>
             <input type="text" name="first" value="first"  required>
